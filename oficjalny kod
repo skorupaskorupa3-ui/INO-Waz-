@@ -42,3 +42,55 @@ void ZapiszWynik(int punkty)
     }
     plik.close(); // zamkniecie pliku
 }
+void PokazHistorie()
+{
+    ifstream plik; // odczyt z pliku
+    plik.open("wyniki.txt"); // otwarcie pliku
+    string linia;
+    cout << "\n historia wynikow " << endl;
+    if (plik.good())
+    {
+        while (getline(plik, linia)) // czytanie lini 
+        {
+            cout << linia << endl; // wyswietlanie linii
+        }
+    }
+
+    else
+    {
+        cout << "brak historii" << endl;
+    }
+    plik.close(); // zamkniecie pliku
+    cout << "nacisnij dowolny klawisz";
+    _getch(); // czekaj na klawisz
+}
+
+bool Logowanie()
+{
+    string hasloPrawidlowe = "tajnehaslo"; // haslo gry
+    string hasloWpisane = "";
+    char ch;
+    system("cls");
+    cout << "podaj haslo: ";
+    while (true)
+    {
+        ch = _getch(); // wczytaj klawisz
+        if (ch == 13) break; // w przypadku dla entera
+        else if (ch == 8) // jesli backspace
+        {
+            if (hasloWpisane.length() > 0)
+            {
+                cout << "\b \b"; // usun znak z konsoli
+                hasloWpisane.pop_back(); // usun znak ze stringa
+            }
+        }
+        else
+        {
+            hasloWpisane += ch; // dodaj do hasla
+            cout << "*"; // wyswietl gwiazdke
+        }
+    }
+    if (hasloWpisane == hasloPrawidlowe) return true; // logowanie poprawne
+    else return false; // bledne haslo
+}
+
