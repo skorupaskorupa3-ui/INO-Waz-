@@ -94,3 +94,32 @@ bool Logowanie()
     else return false; // bledne haslo
 }
 
+void Ustawienia() 
+{
+    koniec_gry = false; // reset wszystkiego
+    dir = STOP; // poczatkowy "kierunek" dla weza
+    x = szerokosc / 2; // start x
+    y = wysokosc / 2; // start y
+    wsp_owocu_X = rand() % szerokosc; // losowanie wspolrzednej x dla owocu
+    wsp_owocu_Y = rand() % wysokosc; // losowanie wspolrzednej y dla owocu
+    wynik = 0; // wynik startowy rowny zero
+    ogon = 0; // startowa dlugosc ogona rowna zero
+}
+
+void Ukryj_kursor() 
+{
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE); // uchwyt konsoli
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = FALSE; // ukrycie kursora
+    SetConsoleCursorInfo(consoleHandle, &info); // zapisz zmiany
+}
+
+void Ustaw_kursor(int x, int y) 
+{
+    COORD coord; // koordynaty
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord); // ustaw kursor
+}
+
