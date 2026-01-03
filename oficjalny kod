@@ -1,0 +1,44 @@
+#include <iostream> // wejscie/wyjscie
+#include <conio.h> // obsluga klawiatury
+#include <windows.h> // biblioteka systemowa windows
+#include <ctime> // do losowania pozycji owocow
+#include <string> // obsluga tekstu
+#include <fstream> // obsluga plikow
+
+using namespace std; 
+
+// zmienne globalne
+
+bool koniec_gry; // stan gry - true oznacza koniec 
+const int szerokosc = 20; // stala szerokosc planszy
+const int wysokosc = 20; // stala wysokosc planszy
+int x, y, wsp_owocu_X, wsp_owocu_Y, wynik; // wspolrzedne (x,y) owocu oraz wynik uzytkownika
+int ogon_X[100], ogon_Y[100]; // tablice ogona
+int ogon; // dlugosc ogona
+
+// typ wyliczeniowy dla kierunkow ruchu
+enum eDirecton {STOP = 0, LEWO, PRAWO, GORA, DOL}; // kierunki
+eDirecton dir; // aktualny kierunek ruchu weza
+
+void ZapiszWynik(int punkty) 
+{
+    string nick; // wpisanie nicku przez uzytkownika
+    system("cls"); // czyszczenie ekranu
+    cout << "Koniec gry" << endl;
+    cout << "Twoj wynik to: " << punkty << endl; // wyswietlenie zdobytych punktow
+    cout << "Podaj swoj NICK: ";
+    cin >> nick; // pobranie nicku
+
+    ofstream plik; // polaczenie do pliku
+    plik.open("wyniki.txt", ios::app); // dopisanie do pliku
+    if (plik.good()) // sprawdzanie pliku
+    { 
+        plik << nick << " - " << punkty << " pkt" << endl; // zapis wyniku
+        cout << "wynik zapisany" << endl;
+    }
+    else 
+    {
+        cout << "brak dostepu do pliku" << endl;
+    }
+    plik.close(); // zamkniecie pliku
+}
