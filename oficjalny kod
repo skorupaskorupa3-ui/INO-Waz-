@@ -122,6 +122,10 @@ void Ustaw_kursor(int x, int y)
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord); // ustaw kursor
 }
+void kolor(int color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color); // ustaw kolor
+}
 void plansza()
 {
     Ustaw_kursor(0, 0); // rysuj od poczatku
