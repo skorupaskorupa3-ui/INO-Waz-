@@ -223,3 +223,22 @@ void mechanika_gry()
         ogon++; // wydluz ogon
     }
 }
+
+int main() 
+{
+    srand((unsigned)time(0)); // losowanie
+    if (!Logowanie()) return 0; // w przypadku blednego hasla wyjdz
+    system("cls");
+    Ukryj_kursor(); // ukryj kursor
+    Ustawienia(); // przygotuj gre
+    while (!koniec_gry) // glowna petla
+    { 
+        plansza(); // rysowanie
+        sterowanie(); // sterowanie
+        mechanika_gry(); // logika
+        Sleep(50); // predkosc gry
+    }
+    ZapiszWynik(wynik); // zapisz wynik
+    PokazHistorie(); // pokaz wyniki
+    return 0; // koniec
+}
