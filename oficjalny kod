@@ -122,4 +122,60 @@ void Ustaw_kursor(int x, int y)
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord); // ustaw kursor
 }
+void plansza()
+{
+    Ustaw_kursor(0, 0); // rysuj od poczatku
+    kolor(7); // kolor bialy
+    for (int i = 0; i < szerokosc + 2; i++) cout << "#"; // gorna ramka
+    cout << endl;
 
+    for (int i = 0; i < wysokosc; i++) // petla pionowa
+    {
+        for (int j = 0; j < szerokosc; j++) // petla pozioma
+        {
+            if (j == 0) { kolor(7); cout << "#"; } // lewa ramka
+            if (i == y && j == x)
+            {
+                kolor(10); cout << (char)219; // rysuj glowe
+            }
+            else if (i == wsp_owocu_Y && j == wsp_owocu_X)
+            {
+                kolor(12); cout << (char)254; // rysuj owoc
+            }
+            else
+            {
+                bool print = false;
+                for (int k = 0; k < ogon; k++) { // szukanie ogona
+                    if (ogon_X[k] == j && ogon_Y[k] == i)
+                    {
+                        kolor(2); cout << (char)177; // rysuj ogon
+                        print = true;
+                    }
+                }
+                if (!print) { kolor(8); cout << "."; } // tlo
+            }
+            if (j == szerokosc - 1) { kolor(7); cout << "#"; } // prawa ramka
+        }
+        cout << endl;
+    }
+    kolor(7);
+    for (int i = 0; i < szerokosc + 2; i++) cout << "#"; // dolna ramka
+    cout << endl;
+    kolor(15);
+    cout << "Wynik: " << wynik << "    " << endl; // pokaz wynik
+}
+
+void sterowanie()
+{
+    if (_kbhit()) // sprawdzenie, czy klawisz zostal nacisniety (biblioteka conio.h)
+    {
+        switch (_getch()) // sterowanie waz (awsd)
+        {
+        case 'a': dir = LEWO; break; // lewo
+        case 'd': dir = PRAWO; break; // prawo
+        case 'w': dir = GORA; break; // gora
+        case 's': dir = DOL; break; // dol
+        case 'x': koniec_gry = true; break; // wyjscie z gry za pomoca klawisza x
+        }
+    }
+}
