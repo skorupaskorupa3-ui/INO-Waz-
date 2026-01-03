@@ -179,3 +179,43 @@ void sterowanie()
         }
     }
 }
+
+
+void mechanika_gry() 
+{
+    int prevX = ogon_X[0]; // stara pozycja x
+    int prevY = ogon_Y[0]; // stara pozycja y
+    int prev2X, prev2Y;
+    ogon_X[0] = x; // glowa do ogona x
+    ogon_Y[0] = y; // glowa do ogona y
+    for (int i = 1; i < ogon; i++) // przesuniecie ogona
+    { 
+        prev2X = ogon_X[i];
+        prev2Y = ogon_Y[i];
+        ogon_X[i] = prevX;
+        ogon_Y[i] = prevY;
+        prevX = prev2X;
+        prevY = prev2Y;
+    }
+    switch (dir) // ruch glowy
+    { 
+    case LEWO: x--; break;
+    case PRAWO: x++; break;
+    case GORA: y--; break;
+    case DOL: y++; break;
+    default: break;
+    }
+    if (x >= szerokosc) x = 0; else if (x < 0) x = szerokosc - 1; // sciany x
+    if (y >= wysokosc) y = 0; else if (y < 0) y = wysokosc - 1; // sciany y
+
+    for (int i = 0; i < ogon; i++) // sprawdz ogon
+        if (ogon_X[i] == x && ogon_Y[i] == y) koniec_gry = true;
+
+    if (x == wsp_owocu_X && y == wsp_owocu_Y) // zjedzenie owocu
+    { 
+        wynik += 10; // dodaj punkty
+        wsp_owocu_X = rand() % szerokosc; // nowy owoc x
+        wsp_owocu_Y = rand() % wysokosc; // nowy owoc y
+        ogon++; // wydluz ogon
+    }
+}
