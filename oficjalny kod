@@ -170,7 +170,7 @@ void plansza()
 }
 
 
-void sterowanie()
+void steroowanie()
 {
     if (_kbhit()) // sprawdzenie, czy klawisz zostal nacisniety (biblioteka conio.h)
     {
