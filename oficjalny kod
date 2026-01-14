@@ -169,21 +169,21 @@ void plansza()
     cout << "Wynik: " << wynik << "    " << endl; // pokaz wynik
 }
 
-
-void steroowanie()
+void sterowanie() 
 {
-    if (_kbhit()) // sprawdzenie, czy klawisz zostal nacisniety (biblioteka conio.h)
-    {
-        switch (_getch()) // sterowanie waz (awsd)
-        {
-        case 'a': dir = LEWO; break; // lewo
-        case 'd': dir = PRAWO; break; // prawo
-        case 'w': dir = GORA; break; // gora
-        case 's': dir = DOL; break; // dol
-        case 'x': koniec_gry = true; break; // wyjscie z gry za pomoca klawisza x
-        }
-    }
+if (_kbhit()) // sprawdzenie czy klawisz zostal nacisniety
+{
+switch (getch()) // sterowanie waz
+{
+case 'a': dir = LEWO; break; // w lewo
+case 'd': dir = PRAWO; break; // w prawo
+case 'w': dir = GORA; break; // w gore
+case 's': dir = DOL; break; // w dol
+case 'x': koniec_gry = true; break; // wyjscie z gry klawiszem x
+          }
+     }
 }
+
 
 void mechanika_gry() 
 {
