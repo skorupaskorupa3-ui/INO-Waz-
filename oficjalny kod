@@ -169,6 +169,7 @@ void plansza()
     cout << "Wynik: " << wynik << "    " << endl; // pokaz wynik
 }
 
+
 void sterowanie()
 {
     if (_kbhit()) // sprawdzenie, czy klawisz zostal nacisniety (biblioteka conio.h)
@@ -183,7 +184,6 @@ void sterowanie()
         }
     }
 }
-
 
 void mechanika_gry() 
 {
